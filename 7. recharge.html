@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Deposit</title>
+<script src="https://cdn.tailwindcss.com"></script></head>
+<body class="grain bg-black text-white min-h-screen p-6">
+<div class="max-w-5xl mx-auto"><h1 class="text-4xl font-black text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400">Deposit</h1>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="bg-white/5 backdrop-blur-xl border border-cyan-500/50 rounded-3xl p-10 text-center">
+<h2 class="text-2xl font-bold text-cyan-400 mb-6">USDT (TRC20)</h2>
+<div id="usdt" class="text-lg font-mono bg-black/50 p-6 rounded-xl break-all border border-cyan-500/30">Loading...</div>
+<button onclick="navigator.clipboard.writeText(document.getElementById('usdt').innerText);alert('Copied')" class="mt-6 w-full py-4 bg-cyan-600 rounded-xl font-bold hover:scale-105 transition">COPY</button>
+</div>
+<div class="bg-white/5 backdrop-blur-xl border border-orange-500/50 rounded-3xl p-10 text-center">
+<h2 class="text-2xl font-bold text-orange-400 mb-6">BTC</h2>
+<div id="btc" class="text-lg font-mono bg-black/50 p-6 rounded-xl break-all border border-orange-500/30">Loading...</div>
+<button onclick="navigator.clipboard.writeText(document.getElementById('btc').innerText);alert('Copied')" class="mt-6 w-full py-4 bg-orange-600 rounded-xl font-bold hover:scale-105 transition">COPY</button>
+</div>
+<div class="bg-white/5 backdrop-blur-xl border border-gray-500/50 rounded-3xl p-10 text-center">
+<h2 class="text-2xl font-bold text-gray-400 mb-6">ETH</h2>
+<div id="eth" class="text-lg font-mono bg-black/50 p-6 rounded-xl break-all border border-gray-500/30">Loading...</div>
+<button onclick="navigator.clipboard.writeText(document.getElementById('eth').innerText);alert('Copied')" class="mt-6 w-full py-4 bg-gray-600 rounded-xl font-bold hover:scale-105 transition">COPY</button>
+</div>
+</div></div>
+<script>
+document.getElementById('usdt').innerText=localStorage.getItem('addr_usdt')||'Set by admin';
+document.getElementById('btc').innerText=localStorage.getItem('addr_btc')||'Set by admin';
+document.getElementById('eth').innerText=localStorage.getItem('addr_eth')||'Set by admin';
+</script>
+</body></html>
