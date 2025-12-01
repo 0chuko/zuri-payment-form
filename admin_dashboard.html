@@ -46,7 +46,7 @@
     <script>
         // --- ADMIN LOGIN SECURITY CHECK ---
         const loggedInUser = localStorage.getItem('currentUserPhone');
-        // You MUST register a user with this phone number (e.g., 9999999999)
+        // If the current user is NOT the admin, deny access.
         if (loggedInUser !== '9999999999') { 
             alert('Access Denied: Admin privileges required.');
             window.location.href = 'login.html';
