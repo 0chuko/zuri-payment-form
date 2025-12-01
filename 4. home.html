@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script></head>
+<body class="grain bg-black text-white min-h-screen p-6">
+<div class="max-w-5xl mx-auto">
+<div class="flex justify-between items-center mb-10"><h1 class="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400">Dashboard</h1>
+<div class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-2 rounded-full text-lg font-bold">VIP <span id="vip">0</span></div></div>
+<div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-10 text-center mb-10">
+<p class="text-xl opacity-70 mb-4">Total Balance</p>
+<div class="text-8xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-white" id="balance">$0.00</div>
+<p class="text-3xl mt-6 text-red-400">Frozen: <span id="frozen">$0.00</span></p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<a href="task.html" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center hover:scale-105 transition"><i class="fas fa-tasks text-4xl text-cyan-400 mb-3"></i><p class="font-medium">Tasks</p></a>
+<a href="recharge.html" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center hover:scale-105 transition"><i class="fas fa-wallet text-4xl text-green-400 mb-3"></i><p class="font-medium">Deposit</p></a>
+<a href="withdraw.html" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center hover:scale-105 transition"><i class="fas fa-download text-4xl text-yellow-400 mb-3"></i><p class="font-medium">Withdraw</p></a>
+<a href="vip.html" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center hover:scale-105 transition"><i class="fas fa-crown text-4xl text-purple-400 mb-3"></i><p class="font-medium">VIP</p></a>
+</div></div>
+<script>if(!localStorage.getItem('loggedin'))window.location='login.html';
+document.getElementById('balance').textContent='$'+(localStorage.getItem('balance')||'0.00');
+document.getElementById('frozen').textContent='$'+(localStorage.getItem('frozen')||'0.00');
+document.getElementById('vip').textContent=localStorage.getItem('vip')||'0';</script>
+</body></html>
