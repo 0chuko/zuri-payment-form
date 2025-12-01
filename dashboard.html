@@ -5,25 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Elite Task Pro - Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
   <style>
     body { font-family: 'Inter', sans-serif; }
     .glow { text-shadow: 0 0 30px rgba(0, 255, 255, 0.8); }
-    @keyframes pulse-glow { 0%,100% { box-shadow: 0 0 20px rgba(0,255,255,0.6); } 50% { box-shadow: 0 0 40px rgba(0,255,255,1); } }
+    @keyframes pulse-glow { 0%,100% { box-shadow: 0 0 30px rgba(0,255,255,0.6); } 50% { box-shadow: 0 0 60px rgba(0,255,255,1); } }
   </style>
 </head>
 <body class="bg-black text-white min-h-screen">
 
-  <!-- Top Bar -->
-  <div class="bg-gradient-to-r from-purple-900 via-black to-cyan-900 p-4 border-b border-cyan-500/30">
+  <div class="bg-gradient-to-r from-purple-900 via-black to-cyan-900 p-5 border-b border-cyan-500/40">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <h1 class="text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-white">Elite Task Pro</h1>
       <div class="flex items-center gap-4">
-        <h1 class="text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-white">Elite Task Pro</h1>
-        <span class="bg-cyan-500/20 px-4 py-1 rounded-full text-cyan-300 text-sm">VIP 0</span>
-      </div>
-      <div class="text-sm">
-        <span class="text-gray-400">Welcome,</span> 
+        <span class="bg-cyan-500/20 px-5 py-2 rounded-full text-cyan-300 font-bold">VIP 0</span>
         <span class="text-cyan-300 font-bold">Member_8821</span>
       </div>
     </div>
@@ -31,65 +27,59 @@
 
   <div class="max-w-6xl mx-auto p-6">
 
-    <!-- Main Balance Card (Chinese Style) -->
-    <div class="mt-10 bg-gradient-to-br from-purple-900/50 via-black to-cyan-900/50 backdrop-blur-xl border border-cyan-500/40 rounded-3xl p-10 text-center shadow-2xl animate-pulse-glow">
-      <p class="text-xl text-gray-400 mb-4">Total Account Balance</p>
-      <div class="text-8xl font-black glow bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-white to-cyan-400">
-        $0.00
-      </div>
-      <p class="text-3xl mt-6 text-green-400 font-bold">+ $0.00 <span class="text-gray-400 text-lg">Today's Earnings</span></p>
+    <!-- Balance Card -->
+    <div class="mt-10 bg-gradient-to-br from-purple-900/60 via-black to-cyan-900/60 backdrop-blur-2xl border-2 border-cyan-500/50 rounded-3xl p-12 text-center shadow-2xl animate-pulse-glow">
+      <p class="text-2xl text-gray-300 mb-4">Total Account Balance</p>
+      <div class="text-9xl font-black glow bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-white to-cyan-400">$0.00</div>
+      <p class="text-4xl mt-8 text-green-400 font-bold">+ $0.00 <span class="text-gray-400 text-xl">Today's Earnings</span></p>
 
-      <div class="grid grid-cols-2 gap-8 mt-12">
-        <div class="bg-black/50 backdrop-blur border border-cyan-500/30 rounded-2xl p-6">
-          <p class="text-gray-400">Available for Withdrawal</p>
-          <p class="text-4xl font-black text-cyan-300">$0.00</p>
+      <div class="grid grid-cols-2 gap-10 mt-12 text-left">
+        <div class="bg-black/70 backdrop-blur border border-cyan-500/40 rounded-2xl p-8">
+          <p class="text-gray-400">Available Balance</p>
+          <p class="text-5xl font-black text-cyan-300">$0.00</p>
         </div>
-        <div class="bg-black/50 backdrop-blur border border-red-500/40 rounded-2xl p-6">
-          <p class="text-gray-400">Frozen Funds (Completing Tasks)</p>
-          <p class="text-4xl font-black text-red-400">$0.00</p>
+        <div class="bg-black/70 backdrop-blur border border-red-500/50 rounded-2xl p-8">
+          <p class="text-gray-400">Frozen Funds</p>
+          <p class="text-5xl font-black text-red-400">$0.00</p>
         </div>
       </div>
 
-      <!-- Task Progress Bar (Fake) -->
-      <div class="mt-10">
-        <div class="flex justify-between text-sm mb-2">
-          <span>Today's Task Progress</span>
-          <span class="text-cyan-300">0 / 10</span>
-        </div>
-        <div class="w-full bg-gray-800 rounded-full h-6 overflow-hidden">
-          <div class="bg-gradient-to-r from-cyan-500 to-purple-500 h-full w-0 transition-all duration-1000" style="width: 0%"></div>
-        </div>
-        <p class="text-center mt-4 text-gray-400">Complete 10 tasks daily to unlock higher commissions</p>
-      </div>
-
-      <!-- Action Buttons -->
-      <div class="mt-12 flex justify-center gap-8">
-        <button class="px-12 py-6 bg-gradient-to-r from-cyan-400 to-cyan-600 text-black font-bold text-xl rounded-full shadow-xl shadow-cyan-500/50 hover:scale-110 transition-all">
-          <i class="fas fa-play mr-3"></i> START NEW TASK
-        </button>
-        <button class="px-12 py-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-xl rounded-full shadow-xl shadow-purple-500/50 hover:scale-110 transition-all">
-          <i class="fas fa-gem mr-3"></i> UPGRADE VIP
-        </button>
+      <div class="mt-12 flex justify-center gap-10">
+        <!-- Button 1: Start Task -->
+        <a href="tasks.html" class="px-14 py-7 bg-gradient-to-r from-cyan-400 to-cyan-600 text-black font-black text-2xl rounded-full shadow-2xl shadow-cyan-500/70 hover:scale-110 transition-all duration-300">
+          START NEW TASK
+        </a>
+        <!-- Button 2: Upgrade VIP -->
+        <a href="vip.html" class="px-14 py-7 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-black text-2xl rounded-full shadow-2xl shadow-purple-500/70 hover:scale-110 transition-all duration-300">
+          UPGRADE VIP
+        </a>
       </div>
     </div>
 
-    <!-- Task History (Fake) -->
-    <div class="mt-16 bg-black/60 backdrop-blur border border-gray-800 rounded-3xl p-8">
-      <h2 class="text-2xl font-bold mb-6 text-cyan-300">Recent Task History</h2>
-      <div class="text-center text-gray-500 text-xl">
-        <p>No tasks completed yet</p>
-        <p class="mt-4">Start your first task to begin earning!</p>
-      </div>
+    <!-- Quick Links -->
+    <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+      <a href="deposit.html" class="bg-gradient-to-br from-green-600/30 to-black border border-green-500/50 backdrop-blur p-8 rounded-2xl text-center hover:scale-105 transition">
+        <i class="fas fa-wallet text-4xl text-green-400 mb-3"></i>
+        <p class="font-bold">Deposit</p>
+      </a>
+      <a href="withdraw.html" class="bg-gradient-to-br from-yellow-600/30 to-black border border-yellow-500/50 backdrop-blur p-8 rounded-2xl text-center hover:scale-105 transition">
+        <i class="fas fa-download text-4xl text-yellow-400 mb-3"></i>
+        <p class="font-bold">Withdraw</p>
+      </a>
+      <a href="history.html" class="bg-gradient-to-br from-blue-600/30 to-black border border-blue-500/50 backdrop-blur p-8 rounded-2xl text-center hover:scale-105 transition">
+        <i class="fas fa-history text-4xl text-blue-400 mb-3"></i>
+        <p class="font-bold">History</p>
+      </a>
+      <a href="support.html" class="bg-gradient-to-br from-pink-600/30 to-black border border-pink-500/50 backdrop-blur p-8 rounded-2xl text-center hover:scale-105 transition">
+        <i class="fas fa-headset text-4xl text-pink-400 mb-3"></i>
+        <p class="font-bold">Support</p>
+      </a>
     </div>
-
   </div>
 
-  <!-- Floating Live Support -->
-  <div class="fixed bottom-8 right-8">
-    <button class="bg-gradient-to-r from-cyan-500 to-purple-600 text-white p-6 rounded-full shadow-2xl shadow-cyan-500/50 hover:scale-110 transition-all">
-      <i class="fas fa-headset text-3xl"></i>
-    </button>
-  </div>
-
+  <!-- Floating Support -->
+  <a href="support.html" class="fixed bottom-8 right-8 bg-gradient-to-r from-cyan-500 to-purple-600 p-6 rounded-full shadow-2xl hover:scale-110 transition-all">
+    <i class="fas fa-headset text-3xl"></i>
+  </a>
 </body>
 </html>
