@@ -71,7 +71,13 @@ if (loginForm) {
                 localStorage.setItem('currentUserPhone', inputPhone);
                 localStorage.setItem('isLoggedIn', 'true');
                 alert('Login successful! Welcome back.');
-                window.location.href = 'home.html';
+                
+                // Admin redirect check
+                if (inputPhone === '9999999999') {
+                    window.location.href = 'admin_dashboard.html';
+                } else {
+                    window.location.href = 'home.html';
+                }
             } else {
                 alert('Login failed: Incorrect password.');
             }
@@ -182,11 +188,12 @@ if (completeButton) {
 
 
 // ======================================================
-// 5. LOGOUT LOGIC (Used on dashboard.html and home.html)
+// 5. LOGOUT LOGIC (Used everywhere)
 // ======================================================
 
 const logoutDashboard = document.getElementById('logout-link'); 
 const logoutHome = document.getElementById('home-logout-link');
+const adminLogoutBtn = document.getElementById('admin-logout'); // New Admin Logout button
 
 function handleLogout(event) {
     event.preventDefault();
@@ -201,6 +208,9 @@ if (logoutDashboard) {
 }
 if (logoutHome) {
     logoutHome.addEventListener('click', handleLogout);
+}
+if (adminLogoutBtn) {
+    adminLogoutBtn.addEventListener('click', handleLogout);
 }
 
 
@@ -261,3 +271,141 @@ function updatePublicPageLinks() {
 
 // Run the function when the page loads
 updatePublicPageLinks();
+
+
+// ======================================================
+// 7. ADMIN FUNCTIONALITY - EDIT ANY USER DATA
+// ======================================================
+
+function updateUserData(phoneNumber, newData) {
+    const userJSON = localStorage.getItem(phoneNumber);
+
+    if (!userJSON) {
+        return false; // User not found
+    }
+
+    // 1. Get the existing data
+    let userData = JSON.parse(userJSON);
+
+    // 2. Merge the new data into the old data
+    userData = { ...userData, ...newData };
+    
+    // 3. Save the updated data back to localStorage
+    localStorage.setItem(phoneNumber, JSON.stringify(userData));
+    return true;
+}
+
+
+// ******************************************************
+// ADMIN DASHBOARD LOGIC (For admin_dashboard.html)
+// ******************************************************
+
+const userListContainer = document.getElementById('user-list-container');
+const editModal = document.getElementById('edit-modal');
+const editForm = document.getElementById('edit-user-form');
+const closeModalBtn = document.getElementById('close-modal');
+
+let editingUserPhone = null;
+
+// Function to fetch and display all user data
+function loadAllUsers() {
+    if (!userListContainer) return;
+
+    userListContainer.innerHTML = '';
+    
+    // Get all keys from localStorage
+    const keys = Object.keys(localStorage);
+    
+    const userKeys = keys.filter(key => 
+        // Filter out non-phone number keys
+        key.length >= 10 && key !== 'isLoggedIn' && key !== 'currentUserPhone'
+    );
+
+    userKeys.forEach(phone => {
+        const userJSON = localStorage.getItem(phone);
+        const user = JSON.parse(userJSON);
+
+        // Check if the current user is the admin to skip listing them
+        if (phone === '9999999999') return; 
+
+        const userCardHTML = `
+            <div class="bg-gray-800 p-4 rounded-lg flex justify-between items-center">
+                <div>
+                    <p class="font-bold text-lg">${user.name || 'N/A'} <span class="text-gray-400">(${phone})</span></p>
+                    <p class="text-cyan-400">Balance: $${user.balance || '0.00'} | VIP: ${user.vip || '0'}</p>
+                    <p class="text-sm text-gray-500">Completed Tasks: ${user.completedTasks ? user.completedTasks.length : 0}</p>
+                </div>
+                <button data-phone="${phone}" class="edit-btn px-4 py-2 bg-yellow-500 text-black rounded hover:bg-yellow-600 transition">
+                    Edit
+                </button>
+            </div>
+        `;
+        userListContainer.innerHTML += userCardHTML;
+    });
+    
+    // Attach event listeners to all new Edit buttons
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            editingUserPhone = this.dataset.phone;
+            openEditModal(editingUserPhone);
+        });
+    });
+}
+
+
+function openEditModal(phone) {
+    const userJSON = localStorage.getItem(phone);
+    if (!userJSON || !editModal) return;
+
+    const user = JSON.parse(userJSON);
+
+    // Fill the modal form with the current user data
+    document.getElementById('modal-phone').textContent = phone;
+    document.getElementById('edit-balance').value = user.balance;
+    document.getElementById('edit-vip').value = user.vip;
+
+    editModal.classList.remove('hidden');
+    editModal.classList.add('flex');
+}
+
+
+// Event listeners for the modal
+if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', () => {
+        if (editModal) {
+            editModal.classList.remove('flex');
+            editModal.classList.add('hidden');
+        }
+    });
+}
+
+if (editForm) {
+    editForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const newBalance = document.getElementById('edit-balance').value;
+        const newVip = document.getElementById('edit-vip').value;
+
+        // Use the function created in Step 7
+        const success = updateUserData(editingUserPhone, { 
+            balance: parseFloat(newBalance).toFixed(2),
+            vip: newVip 
+        });
+
+        if (success) {
+            alert(`User ${editingUserPhone} updated successfully!`);
+            if (editModal) {
+                editModal.classList.remove('flex');
+                editModal.classList.add('hidden');
+            }
+            loadAllUsers(); // Reload the list to show changes
+        } else {
+            alert('Error updating user.');
+        }
+    });
+}
+
+// Initial load if we are on the admin page
+if (userListContainer) {
+    loadAllUsers();
+}
