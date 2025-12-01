@@ -1,24 +1,114 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script></head>
-<body class="grain bg-black text-white min-h-screen p-6">
-<div class="max-w-5xl mx-auto">
-<div class="flex justify-between items-center mb-10"><h1 class="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400">Dashboard</h1>
-<div class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-2 rounded-full text-lg font-bold">VIP <span id="vip">0</span></div></div>
-<div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-10 text-center mb-10">
-<p class="text-xl opacity-70 mb-4">Total Balance</p>
-<div class="text-8xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-white" id="balance">$0.00</div>
-<p class="text-3xl mt-6 text-red-400">Frozen: <span id="frozen">$0.00</span></p>
-</div>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-<a href="task.html" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center hover:scale-105 transition"><i class="fas fa-tasks text-4xl text-cyan-400 mb-3"></i><p class="font-medium">Tasks</p></a>
-<a href="recharge.html" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center hover:scale-105 transition"><i class="fas fa-wallet text-4xl text-green-400 mb-3"></i><p class="font-medium">Deposit</p></a>
-<a href="withdraw.html" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center hover:scale-105 transition"><i class="fas fa-download text-4xl text-yellow-400 mb-3"></i><p class="font-medium">Withdraw</p></a>
-<a href="vip.html" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center hover:scale-105 transition"><i class="fas fa-crown text-4xl text-purple-400 mb-3"></i><p class="font-medium">VIP</p></a>
-</div></div>
-<script>if(!localStorage.getItem('loggedin'))window.location='login.html';
-document.getElementById('balance').textContent='$'+(localStorage.getItem('balance')||'0.00');
-document.getElementById('frozen').textContent='$'+(localStorage.getItem('frozen')||'0.00');
-document.getElementById('vip').textContent=localStorage.getItem('vip')||'0';</script>
-</body></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Elite Task Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #000; color: #fff; }
+        .grain { background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E"); }
+        .glass { border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); }
+        .glow-text { text-shadow: 0 0 10px rgba(0,255,255,0.4); }
+    </style>
+</head>
+<body class="grain min-h-screen bg-gradient-to-br from-black via-slate-900 to-purple-950 p-4 sm:p-8">
+    
+    <div class="max-w-4xl mx-auto">
+        
+        <!-- Header & Profile Card -->
+        <header class="flex justify-between items-center mb-10">
+            <h1 class="text-3xl sm:text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-purple-400">
+                Dashboard
+            </h1>
+            <a href="#" id="home-logout-link" class="px-4 py-2 bg-red-600 rounded-full text-sm font-semibold hover:bg-red-700 transition">
+                Logout
+            </a>
+        </header>
+
+        <!-- User Info Card -->
+        <div class="glass rounded-3xl p-6 sm:p-8 mb-8 shadow-2xl border-cyan-400/20">
+            <div class="flex justify-between items-start mb-4">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center text-xl text-white">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div>
+                        <p id="user-name" class="text-2xl sm:text-3xl font-bold"></p>
+                        <p id="user-phone" class="text-sm text-gray-400 mt-1"></p>
+                    </div>
+                </div>
+                <!-- VIP Badge -->
+                <div id="vip-badge" class="px-3 py-1 bg-yellow-600/30 text-yellow-300 font-bold rounded-full text-xs sm:text-sm border border-yellow-500">
+                    VIP 0
+                </div>
+            </div>
+            
+            <p id="welcome-message" class="text-lg text-gray-300 mt-4"></p>
+        </div>
+
+        <!-- Financial Overview Cards -->
+        <div class="grid grid-cols-2 gap-4 mb-8">
+            
+            <!-- Available Balance Card -->
+            <div class="glass rounded-2xl p-6 shadow-xl bg-gradient-to-tr from-cyan-900/10 to-transparent border-cyan-500/30">
+                <p class="text-sm uppercase font-semibold text-gray-400">Available Balance</p>
+                <p id="user-balance" class="text-4xl sm:text-5xl font-black mt-2 text-green-400 glow-text">$0.00</p>
+                <p class="text-xs text-gray-500 mt-1">Ready for withdrawal</p>
+            </div>
+            
+            <!-- Frozen/Pending Card -->
+            <div class="glass rounded-2xl p-6 shadow-xl bg-gradient-to-tr from-purple-900/10 to-transparent border-purple-500/30">
+                <p class="text-sm uppercase font-semibold text-gray-400">Frozen Funds</p>
+                <p id="user-frozen" class="text-4xl sm:text-5xl font-black mt-2 text-purple-400">$0.00</p>
+                <p class="text-xs text-gray-500 mt-1">Pending task review</p>
+            </div>
+        </div>
+
+        <!-- Action Buttons Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+            <!-- Tasks Button -->
+            <a href="task.html" class="flex flex-col items-center justify-center p-6 glass rounded-2xl transition hover:bg-white/10 hover:scale-[1.03] shadow-lg">
+                <i class="fas fa-tasks text-3xl mb-2 text-cyan-400"></i>
+                <span class="font-bold text-lg">Grab Tasks</span>
+            </a>
+            <!-- Withdraw Button -->
+            <a href="#" class="flex flex-col items-center justify-center p-6 glass rounded-2xl transition hover:bg-white/10 hover:scale-[1.03] shadow-lg">
+                <i class="fas fa-money-bill-transfer text-3xl mb-2 text-green-400"></i>
+                <span class="font-bold text-lg">Withdraw</span>
+            </a>
+            <!-- Recharge Button -->
+            <a href="#" class="flex flex-col items-center justify-center p-6 glass rounded-2xl transition hover:bg-white/10 hover:scale-[1.03] shadow-lg">
+                <i class="fas fa-sack-dollar text-3xl mb-2 text-yellow-400"></i>
+                <span class="font-bold text-lg">Recharge</span>
+            </a>
+            <!-- Service Button -->
+            <a href="service.html" class="flex flex-col items-center justify-center p-6 glass rounded-2xl transition hover:bg-white/10 hover:scale-[1.03] shadow-lg">
+                <i class="fas fa-headset text-3xl mb-2 text-purple-400"></i>
+                <span class="font-bold text-lg">Service</span>
+            </a>
+        </div>
+        
+        <!-- Task Status Section -->
+        <div class="glass rounded-3xl p-6 sm:p-8 shadow-2xl">
+            <h3 class="text-xl font-bold mb-4 border-b border-gray-700 pb-2">Your Task Progress</h3>
+            <div class="space-y-4" id="task-summary-container">
+                <p class="text-gray-400">Loading task summary...</p>
+                <!-- Task stats will be populated here -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script to initialize the dashboard -->
+    <script>
+        // Check authentication immediately
+        if (localStorage.getItem('isLoggedIn') !== 'true' || !localStorage.getItem('currentUserPhone')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>
