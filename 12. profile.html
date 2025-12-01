@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Profile</title>
+<script src="https://cdn.tailwindcss.com"></script></head>
+<body class="grain bg-black text-white min-h-screen p-10">
+<div class="max-w-2xl mx-auto text-center">
+<h1 class="text-4xl font-black mb-10 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400">My Profile</h1>
+<div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-12 space-y-6">
+<p class="text-2xl">Phone: +1*** *** 8821</p>
+<p class="text-2xl">VIP Level: <span id="vip">0</span></p>
+<p class="text-2xl">Total Earned: $0.00</p>
+</div></div>
+<script>document.getElementById('vip').textContent=localStorage.getItem('vip')||'0';</script>
+</body></html>
