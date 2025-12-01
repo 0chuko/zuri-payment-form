@@ -1,122 +1,160 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elite Task Pro — 2025</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
-  <style>
-    body { font-family: 'Inter', sans-serif; background: #000; color: #fff; }
-    .grain { background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E"); }
-    .particle { position: absolute; width: 2px; height: 2px; background: #00ffff; border-radius: 50%; opacity: 0.4; animation: float 20s infinite linear; }
-    @keyframes float { 0% { transform: translateY(100vh) scale(0); } 100% { transform: translateY(-100px) scale(1); } }
-    .glow { text-shadow: 0 0 40px rgba(0,255,255,0.6); }
-    .glass { border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Task Pro — Next-Gen Earning Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
+    <style>
+        /* Base styles */
+        body { font-family: 'Inter', sans-serif; background: #000; color: #fff; }
+        .grain { background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E"); }
+        .particle { position: absolute; width: 2px; height: 2px; background: #00ffff; border-radius: 50%; opacity: 0.4; animation: float 20s infinite linear; }
+        @keyframes float { 0% { transform: translateY(100vh) scale(0); } 100% { transform: translateY(-100px) scale(1); } }
+        .glow { text-shadow: 0 0 40px rgba(0,255,255,0.6); }
+        .glass { border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); }
+        
+        /* Custom animations for smoothness */
+        .slide-in-up {
+            animation: slideInUp 1s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes slideInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
 </head>
 <body class="grain min-h-screen relative bg-gradient-to-br from-black via-slate-950 to-purple-950 overflow-x-hidden">
-  <!-- Particles -->
-  <div id="particles" class="fixed inset-0 pointer-events-none"></div>
+    
+    <div id="particles" class="fixed inset-0 pointer-events-none"></div>
 
-  <!-- Navbar -->
-  <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-6">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
-      <div class="flex items-center space-x-4">
-        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-2xl"></div>
-        <h1 class="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400">Elite Task Pro</h1>
-      </div>
-      <div class="flex space-x-6">
-        <a href="login.html" class="px-8 py-4 glass rounded-2xl hover:bg-white/10 transition">Login</a>
-        <a href="register.html" class="px-10 py-4 bg-gradient-to-r from-cyan-400 to-purple-600 text-black font-bold rounded-2xl hover:scale-105 transition shadow-2xl">Register Free</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <section class="relative min-h-screen flex items-center justify-center px-6 pt-24">
-    <div class="max-w-7xl mx-auto text-center z-10">
-      <span class="inline-block px-6 py-2 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 border border-emerald-500/50 rounded-full text-emerald-300 text-sm font-medium mb-10 backdrop-blur-xl">
-        Over 2.8 Million Members Worldwide
-      </span>
-      <h1 class="text-6xl md:text-9xl font-black leading-tight mb-8">
-        <span class="block opacity-80">Earn Daily</span>
-        <span class="block glow bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-purple-400 to-pink-400">Up to $8,000</span>
-      </h1>
-      <p class="text-xl md:text-3xl opacity-80 mb-16 max-w-4xl mx-auto leading-relaxed">
-        Zero risk • Instant withdrawals • Backed by world-leading institutions
-      </p>
-      <div class="flex flex-col md:flex-row gap-8 justify-center mb-20">
-        <a href="register.html" class="px-20 py-8 bg-white text-black font-black text-2xl rounded-3xl hover:scale-105 transition-all shadow-2xl">
-          START EARNING NOW — FREE
-        </a>
-        <a href="login.html" class="px-20 py-8 glass border-2 border-white/30 text-white font-bold text-2xl rounded-3xl hover:bg-white/20 transition-all">
-          LOGIN TO DASHBOARD
-        </a>
-      </div>
-
-      <!-- Animated Stats -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
-        <div class="glass rounded-3xl p-10">
-          <div class="text-5xl md:text-7xl font-black text-cyan-400 glow" id="paid">$0</div>
-          <p class="text-xl opacity-70 mt-4">Total Paid Out</p>
+    <nav class="sticky top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 glass shadow-2xl">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3 md:space-x-4">
+                <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-xl md:rounded-2xl shadow-xl"></div>
+                <h1 class="text-xl md:text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-purple-400">Elite Task Pro</h1>
+            </div>
+            
+            <div class="flex space-x-3 md:space-x-6" id="nav-auth-links">
+                <a href="login.html" class="px-5 py-2 md:px-8 md:py-3 glass rounded-xl md:rounded-2xl hover:bg-white/10 transition text-sm md:text-base">Login</a>
+                <a href="register.html" class="px-6 py-2 md:px-10 md:py-3 bg-gradient-to-r from-cyan-400 to-purple-600 text-black font-bold rounded-xl md:rounded-2xl hover:scale-105 transition shadow-lg text-sm md:text-base">Register Free</a>
+            </div>
         </div>
-        <div class="glass rounded-3xl p-10">
-          <div class="text-5xl md:text-7xl font-black text-purple-400 glow" id="users">0</div>
-          <p class="text-xl opacity-70 mt-4">Active Members</p>
+    </nav>
+
+    <section class="relative min-h-[85vh] flex items-center justify-center px-4 md:px-8 pt-20 pb-16">
+        <div class="max-w-6xl mx-auto text-center z-10">
+            
+            <span class="slide-in-up inline-block px-5 py-2 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 border border-emerald-500/50 rounded-full text-emerald-300 text-xs md:text-sm font-medium mb-8 backdrop-blur-xl" style="animation-delay: 0.1s;">
+                Over 2.8 Million Members Worldwide
+            </span>
+            
+            <h1 class="slide-in-up text-5xl md:text-8xl lg:text-9xl font-black leading-snug mb-6" style="animation-delay: 0.3s;">
+                <span class="block opacity-90">Earn Daily</span>
+                <span class="block glow bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-purple-400 to-pink-400">Up to $8,000</span>
+            </h1>
+            
+            <p class="slide-in-up text-lg md:text-2xl opacity-80 mb-12 max-w-3xl mx-auto leading-relaxed" style="animation-delay: 0.5s;">
+                </p>
+            
+            <div class="slide-in-up flex flex-col md:flex-row gap-4 md:gap-6 justify-center mb-16" id="hero-auth-buttons" style="animation-delay: 0.7s;">
+                <a href="register.html" class="px-12 py-5 md:px-16 md:py-6 bg-white text-black font-black text-xl rounded-2xl md:rounded-3xl hover:scale-[1.03] transition-all shadow-2xl">
+                    START EARNING NOW — FREE
+                </a>
+                <a href="login.html" class="px-12 py-5 md:px-16 md:py-6 glass border-2 border-white/30 text-white font-bold text-xl rounded-2xl md:rounded-3xl hover:bg-white/20 transition-all">
+                    LOGIN TO DASHBOARD
+                </a>
+            </div>
+
+            <div class="slide-in-up grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto" style="animation-delay: 0.9s;">
+                <div class="glass rounded-xl p-6 md:p-8">
+                    <div class="text-4xl md:text-6xl font-black text-cyan-400 glow" id="paid">$0</div>
+                    <p class="text-base opacity-70 mt-2">Total Paid Out</p>
+                </div>
+                <div class="glass rounded-xl p-6 md:p-8">
+                    <div class="text-4xl md:text-6xl font-black text-purple-400 glow" id="users">0</div>
+                    <p class="text-base opacity-70 mt-2">Active Members</p>
+                </div>
+                <div class="glass rounded-xl p-6 md:p-8">
+                    <div class="text-4xl md:text-6xl font-black text-green-400 glow">4.99★</div>
+                    <p class="text-base opacity-70 mt-2">Member Rating</p>
+                </div>
+            </div>
+
+            <div class="slide-in-up mt-20 md:mt-28" style="animation-delay: 1.1s;">
+                <p class="text-lg opacity-60 mb-8 font-semibold uppercase tracking-wider">BACKED BY GLOBAL LEADERS</p>
+                <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-80 max-w-4xl mx-auto">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Amazon_icon.svg" alt="Amazon" class="h-8 md:h-10 grayscale brightness-150 filter invert">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Meta_Platforms_Inc._logo.svg" alt="Meta" class="h-8 md:h-10 grayscale brightness-150 filter invert">
+                    <div class="text-3xl font-bold text-gray-400">SONY</div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Nvidia_logo.svg" alt="NVIDIA" class="h-8 md:h-10 grayscale brightness-150 filter invert">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Tesla_Motors.svg" alt="Tesla" class="h-8 md:h-10 grayscale brightness-150 filter invert">
+                    <div class="text-3xl font-bold text-gray-400">ORACLE</div>
+                    <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" alt="Binance Labs" class="h-8 md:h-10 grayscale brightness-150">
+                </div>
+            </div>
         </div>
-        <div class="glass rounded-3xl p-10">
-          <div class="text-5xl md:text-7xl font-black text-green-400 glow">4.99★</div>
-          <p class="text-xl opacity-70 mt-4">Member Rating</p>
-        </div>
-      </div>
+    </section>
 
-      <!-- Funded By Badges -->
-      <div class="mt-24">
-        <p class="text-lg opacity-60 mb-10">BACKED BY GLOBAL LEADERS</p>
-        <div class="flex flex-wrap justify-center gap-16 items-center opacity-70">
-          <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" alt="Binance Labs" class="h-12 grayscale brightness-150">
-          <img src="https://cryptologos.cc/logos/okex-okb-logo.png" alt="OKX Ventures" class="h-12 grayscale brightness-150">
-          <div class="text-3xl font-bold text-gray-400">Temasek</div>
-          <div class="text-3xl font-bold text-gray-400">Sequoia Capital</div>
-          <div class="text-3xl font-bold text-gray-400">a16z</div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <a href="service.html" class="fixed bottom-6 right-6 z-50 w-16 h-16 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all">
+        <i class="fas fa-headset text-3xl"></i>
+    </a>
 
-  <!-- Floating Support -->
-  <a href="service.html" class="fixed bottom-8 right-8 z-50 w-20 h-20 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all">
-    <i class="fas fa-headset text-4xl"></i>
-  </a>
+    <div class="h-20"></div>
 
-  <script>
-    // Particles
-    for(let i=0; i<100; i++){
-      const p = document.createElement('div');
-      p.className = 'particle';
-      p.style.left = Math.random()*100 + 'vw';
-      p.style.animationDelay = Math.random()*20 + 's';
-      p.style.animationDuration = (15 + Math.random()*25) + 's';
-      document.getElementById('particles').appendChild(p);
-    }
-
-    // Animated counters
-    const count = (el, target, suffix = '') => {
-      let i = 0;
-      const timer = setInterval(() => {
-        i += target / 100;
-        if (i >= target) {
-          el.textContent = target.toLocaleString() + suffix;
-          clearInterval(timer);
-        } else {
-          el.textContent = Math.floor(i).toLocaleString() + suffix;
+    <script>
+        // Particles (Kept as is)
+        for(let i=0; i<100; i++){
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random()*100 + 'vw';
+            p.style.animationDelay = Math.random()*20 + 's';
+            p.style.animationDuration = (15 + Math.random()*25) + 's';
+            document.getElementById('particles').appendChild(p);
         }
-      }, 20);
-    };
-    setTimeout(() => count(document.getElementById('paid'), 892000000, '+'), 500);
-    setTimeout(() => count(document.getElementById('users'), 2800000, '+'), 700);
-  </script>
+
+        // NEW NUMBER FORMATTING FUNCTION
+        const formatNumber = (num, decimals = 1) => {
+            if (num >= 1000000000) {
+                return (num / 1000000000).toFixed(decimals).replace(/\.0$/, '') + 'B';
+            }
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(decimals).replace(/\.0$/, '') + 'M';
+            }
+            if (num >= 1000) {
+                return (num / 1000).toFixed(decimals).replace(/\.0$/, '') + 'K';
+            }
+            return num;
+        };
+        
+        // Animated counters (Updated to use the new formatNumber function)
+        const count = (el, target, suffix = '') => {
+            let i = 0;
+            const timer = setInterval(() => {
+                i += target / 100;
+                
+                let displayValue;
+                if (i >= target) {
+                    displayValue = formatNumber(target);
+                    el.textContent = displayValue + suffix;
+                    clearInterval(timer);
+                } else {
+                    displayValue = formatNumber(Math.floor(i));
+                    el.textContent = displayValue + suffix;
+                }
+            }, 20);
+        };
+        
+        const totalPaidOut = 892000000;
+        const activeMembers = 2800000;
+
+        setTimeout(() => count(document.getElementById('paid'), totalPaidOut, '+'), 500);
+        setTimeout(() => count(document.getElementById('users'), activeMembers, '+'), 700);
+    </script>
+    
+    <script src="app.js"></script>
 </body>
 </html>
