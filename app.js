@@ -6,7 +6,7 @@ const allTasks = [
     { id: 2, name: "Subscribe to Twitter Channel", description: "Follow the provided Twitter account and turn on notifications.", reward: 75.50 },
     { id: 3, name: "Follow Instagram Influencer", description: "Find the influencer's profile and follow them.", reward: 52.00 },
     { id: 4, name: "Share TikTok Clip", description: "Share the designated TikTok clip to your feed.", reward: 90.25 },
-    // ADD ALL YOUR TASKS HERE. The list will grow automatically.
+    // Add all your tasks here
 ];
 
 
@@ -36,13 +36,11 @@ if (registrationForm) {
             balance: '0.00',
             frozen: '0.00',
             vip: '0',
-            completedTasks: [] // New list to track completed tasks
+            completedTasks: [] 
         };
 
-        // Save new user data using the phone number as the unique key
         localStorage.setItem(phoneNumber, JSON.stringify(userData));
         
-        // Log the new user in immediately
         localStorage.setItem('currentUserPhone', phoneNumber);
         localStorage.setItem('isLoggedIn', 'true');
 
@@ -70,7 +68,6 @@ if (loginForm) {
             const userData = JSON.parse(userJSON);
 
             if (userData.password === inputPassword) {
-                // SUCCESS! Log the user in
                 localStorage.setItem('currentUserPhone', inputPhone);
                 localStorage.setItem('isLoggedIn', 'true');
                 alert('Login successful! Welcome back.');
@@ -96,7 +93,6 @@ if (taskContainer) {
     const userData = userJSON ? JSON.parse(userJSON) : { completedTasks: [] };
     const completedIds = userData.completedTasks;
     
-    // Clear the placeholder content
     taskContainer.innerHTML = ''; 
 
     allTasks.forEach(task => {
@@ -166,7 +162,7 @@ if (completeButton) {
                 const newBalance = currentBalance + taskData.reward;
 
                 userData.balance = newBalance.toFixed(2);
-                userData.completedTasks.push(taskId); // Add task ID to completed list
+                userData.completedTasks.push(taskId); 
                 
                 localStorage.setItem(currentUserPhone, JSON.stringify(userData));
                 
@@ -186,18 +182,18 @@ if (completeButton) {
 
 
 // ======================================================
-// 5. LOGOUT LOGIC (Used on dashboard.html and index.html)
+// 5. LOGOUT LOGIC (Used on dashboard.html and home.html)
 // ======================================================
 
-const logoutDashboard = document.getElementById('logout-link'); // from dashboard.html
-const logoutHome = document.getElementById('home-logout-link'); // from home.html
+const logoutDashboard = document.getElementById('logout-link'); 
+const logoutHome = document.getElementById('home-logout-link');
 
 function handleLogout(event) {
     event.preventDefault();
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('currentUserPhone');
     alert('You have been logged out successfully.');
-    window.location.href = 'index.html'; // Redirect to the public landing page
+    window.location.href = 'index.html'; 
 }
 
 if (logoutDashboard) {
