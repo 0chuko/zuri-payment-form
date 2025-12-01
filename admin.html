@@ -3,43 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <title>ADMIN CONTROL CENTER</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
+  <style>
+    body{font-family:'Inter',sans-serif;background:#0d0015;color:#fff;}
+    .glass{background:rgba(255,0,50,0.05);border:1px solid rgba(255,0,50,0.2);backdrop-filter:blur(12px);}
+  </style>
 </head>
-<body class="grain bg-black text-white min-h-screen p-6">
-<div class="max-w-5xl mx-auto">
-  <div class="flex justify-between items-center mb-10">
-    <h1 class="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400">Dashboard</h1>
-    <div class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-2 rounded-full text-lg font-bold">VIP <span id="vip">0</span></div>
-  </div>
-  <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-10 text-center mb-10">
-    <p class="text-xl opacity-70 mb-4">Total Balance</p>
-    <div class="text-8xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-white" id="balance">$0.00</div>
-    <p class="text-3xl mt-6 text-red-400">Frozen: <span id="frozen">$0.00</span></p>
-    <p class="text-2xl mt-4 text-green-400">Today's Earnings: <span id="today">$0.00</span></p>
-    <div class="mt-8 w-full bg-white/10 rounded-full h-6">
-      <div id="progress" class="bg-gradient-to-r from-cyan-500 to-purple-500 h-full rounded-full text-right pr-4 text-white font-bold" style="width:0%">0%</div>
+<body class="min-h-screen bg-gradient-to-br from-black via-red-950 to-black p-6">
+  <div class="max-w-7xl mx-auto">
+    <h1 class="text-5xl font-black text-center mb-2 text-red-500">ADMIN CONTROL CENTER</h1>
+    <p class="text-center text-red-400 mb-10">Full control over every user</p>
+
+    <!-- Search User -->
+    <div class="glass rounded-3xl p-8 mb-8">
+      <input id="search" type="text" placeholder="Enter User ID (e.g. user_1738881234567)" class="w-full p-5 bg-black/50 border border-red-500/50 rounded-2xl text-white text-xl">
+      <button onclick="loadUser()" class="mt-4 w-full py-5 bg-gradient-to-r from-red-600 to-pink-600 font-black text-2xl rounded-2xl hover:scale-105 transition">LOAD USER</button>
     </div>
+
+    <!-- User Edit Panel -->
+    <div id="panel" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
+      <div class="glass rounded-3xl p-8"><h3 class="text-xl font-bold text-cyan-400 mb-4">Balance</h3><input id="bal" class="w-full p-4 bg-black/50 border border-cyan-500 rounded-xl text-2xl"></div>
+      <div class="glass rounded-3xl p-8"><h3 class="text-xl font-bold text-red-400 mb-4">Frozen</h3><input id="fro" class="w-full p-4 bg-black/50 border border-red-500 rounded-xl text-2xl"></div>
+      <div class="glass rounded-3xl p-8"><h3 class="text-xl font-bold text-purple-400 mb-4">VIP Level</h3><input id="vip" class="w-full p-4 bg-black/50 border border-purple-500 rounded-xl text-2xl"></div>
+      <div class="glass rounded-3xl p-8"><h3 class="text-xl font-bold text-green-400 mb-4">Today Earnings</h3><input id="today" class="w-full p-4 bg-black/50 border border-green-500 rounded-xl text-2xl"></div>
+      <div class="glass rounded-3xl p-8"><h3 class="text-xl font-bold text-yellow-400 mb-4">Task Progress %</h3><input id="prog" class="w-full p-4 bg-black/50 border border-yellow-500 rounded-xl text-2xl"></div>
+      <div class="glass rounded-3xl p-8"><h3 class="text-xl font-bold text-pink-400 mb-4">Account Status</h3>
+        <select id="status" class="w-full p-4 bg-black/50 border border-pink-500 rounded-xl text-xl">
+          <option>Active</option><option>Frozen</option><option>Banned</option>
+        </select>
+      </div>
+    </div>
+
+    <button onclick="saveUser()" class="mt-10 w-full py-8 bg-gradient-to-r from-red-700 to-pink-700 font-black text-3xl rounded-3xl hover:scale-105 transition shadow-2xl">
+      APPLY CHANGES INSTANTLY
+    </button>
+
+    <a href="admin_login.html" onclick="localStorage.removeItem('admin')" class="block text-center mt-10 text-red-400 underline">Logout</a>
   </div>
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-    <a href="task.html" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center hover:scale-105 transition"><i class="fas fa-tasks text-4xl text-cyan-400 mb-3"></i><p class="font-medium">Tasks</p></a>
-    <a href="recharge.html" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center hover:scale-105 transition"><i class="fas fa-wallet text-4xl text-green-400 mb-3"></i><p class="font-medium">Deposit</p></a>
-    <a href="withdraw.html" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center hover:scale-105 transition"><i class="fas fa-download text-4xl text-yellow-400 mb-3"></i><p class="font-medium">Withdraw</p></a>
-    <a href="vip.html" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center hover:scale-105 transition"><i class="fas fa-crown text-4xl text-purple-400 mb-3"></i><p class="font-medium">VIP</p></a>
-  </div>
-</div>
-<script>
-if(!localStorage.getItem('loggedin')) window.location='login.html';
-const user = localStorage.getItem('currentUser') || 'default';
-document.getElementById('balance').textContent = '$' + (localStorage.getItem(user + '_balance') || '0.00');
-document.getElementById('frozen').textContent = '$' + (localStorage.getItem(user + '_frozen') || '0.00');
-document.getElementById('vip').textContent = localStorage.getItem(user + '_vip') || '0';
-document.getElementById('today').textContent = '$' + (localStorage.getItem(user + '_today') || '0.00');
-const prog = localStorage.getItem(user + '_progress') || '0';
-document.getElementById('progress').style.width = prog + '%';
-document.getElementById('progress').textContent = prog + '%';
-</script>
+
+  <script>
+    if(localStorage.getItem('admin')!=='true') window.location='admin_login.html';
+
+    function loadUser(){
+      const id = document.getElementById('search').value.trim() || localStorage.getItem('currentUser');
+      if(!id) return alert('Enter User ID');
+      document.getElementById('panel').classList.remove('hidden');
+      document.getElementById('bal').value = localStorage.getItem(id+'_balance') || '0.00';
+      document.getElementById('fro').value = localStorage.getItem(id+'_frozen') || '0.00';
+      document.getElementById('vip').value = localStorage.getItem(id+'_vip') || '0';
+      document.getElementById('today').value = localStorage.getItem(id+'_today') || '0.00';
+      document.getElementById('prog').value = localStorage.getItem(id+'_progress') || '0';
+    }
+
+    function saveUser(){
+      const id = document.getElementById('search').value.trim() || localStorage.getItem('currentUser');
+      if(!id) return alert('No user');
+      localStorage.setItem(id+'_balance', document.getElementById('bal').value);
+      localStorage.setItem(id+'_frozen', document.getElementById('fro').value);
+      localStorage.setItem(id+'_vip', document.getElementById('vip').value);
+      localStorage.setItem(id+'_today', document.getElementById('today').value);
+      localStorage.setItem(id+'_progress', document.getElementById('prog').value);
+      alert('User '+id+' updated instantly!');
+    }
+  </script>
 </body>
 </html>
