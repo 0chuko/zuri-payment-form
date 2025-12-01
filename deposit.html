@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>Deposit USDT</title><script src="https://cdn.tailwindcss.com"></script></head>
+<html><head><meta charset="UTF-8"><title>Deposit Crypto</title><script src="https://cdn.tailwindcss.com"></script></head>
 <body class="bg-black text-white min-h-screen p-8">
-  <div class="max-w-2xl mx-auto text-center">
-    <h1 class="text-5xl font-black text-cyan-400 mb-8">Deposit USDT (TRC20)</h1>
-    <div class="bg-gradient-to-br from-purple-900/50 to-cyan-900/50 backdrop-blur border border-cyan-500 rounded-3xl p-10">
-      <p class="text-xl mb-6">Send USDT TRC20 to this address:</p>
-      <div id="addr" class="text-3xl font-mono bg-black/70 p-6 rounded-xl break-all border border-cyan-500">TR7NHqjeKQxGTCuuP8vJ8j3uQ8Z8Z8Z8Z8</div>
-      <p class="mt-6 text-yellow-400">Minimum: 50 USDT • Arrives in 1–3 minutes</p>
-      <button onclick="alert('Deposit detected! +500 USDT added (demo)')" class="mt-8 px-16 py-6 bg-green-500 text-black font-black text-2xl rounded-full hover:scale-110 transition">
-        I HAVE SENT USDT
-      </button>
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-5xl font-black text-cyan-400 text-center mb-10">Deposit Cryptocurrency</h1>
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- USDT -->
+      <div class="bg-gradient-to-br from-cyan-900/50 to-black border border-cyan-500 rounded-3xl p-10 text-center">
+        <h2 class="text-3xl font-bold text-cyan-400 mb-6">USDT (TRC20)</h2>
+        <div id="usdtAddr" class="text-xl font-mono bg-black/70 p-6 rounded-xl break-all border border-cyan-500">Loading...</div>
+        <button onclick="navigator.clipboard.writeText(document.getElementById('usdtAddr').innerText); alert('Copied!')" class="mt-6 px-8 py-4 bg-cyan-600 rounded-xl font-bold hover:scale-110 transition">COPY ADDRESS</button>
+      </div>
+      <!-- BTC -->
+      <div class="bg-gradient-to-br from-orange-900/50 to-black border border-orange-500 rounded-3xl p-10 text-center">
+        <h2 class="text-3xl font-bold text-orange-400 mb-6">BTC</h2>
+        <div id="btcAddr" class="text-xl font-mono bg-black/70 p-6 rounded-xl break-all border border-orange-500">Loading...</div>
+        <button onclick="navigator.clipboard.writeText(document.getElementById('btcAddr').innerText); alert('Copied!')" class="mt-6 px-8 py-4 bg-orange-600 rounded-xl font-bold hover:scale-110 transition">COPY ADDRESS</button>
+      </div>
+      <!-- ETH -->
+      <div class="bg-gradient-to-br from-gray-700/50 to-black border border-gray-500 rounded-3xl p-10 text-center">
+        <h2 class="text-3xl font-bold text-gray-400 mb-6">ETH (ERC20)</h2>
+        <div id="ethAddr" class="text-xl font-mono bg-black/70 p-6 rounded-xl break-all border border-gray-500">Loading...</div>
+        <button onclick="navigator.clipboard.writeText(document.getElementById('ethAddr').innerText); alert('Copied!')" class="mt-6 px-8 py-4 bg-gray-600 rounded-xl font-bold hover:scale-110 transition">COPY ADDRESS</button>
+      </div>
     </div>
-    <a href="dashboard.html" class="mt-10 inline-block text-cyan-400 hover:underline">← Back</a>
+    <div class="text-center mt-10">
+      <a href="dashboard.html" class="text-cyan-400 text-xl hover:underline">← Back to Dashboard</a>
+    </div>
   </div>
 
   <script>
-    const userData = localStorage.getItem('user_default') || localStorage.getItem('user_Member_8821');
-    if (userData) {
-      const data = JSON.parse(userData);
-      document.getElementById('addr').textContent = data.depositAddr || "TR7NHqjeKQxGTCuuP8vJ8j3uQ8Z8Z8Z8Z8";
-    }
+    function loadAddr(id, key){ document.getElementById(id).innerText = localStorage.getItem(key) || 'Not set by admin'; }
+    loadAddr('usdtAddr','addr_usdt');
+    loadAddr('btcAddr','addr_btc');
+    loadAddr('ethAddr','addr_eth');
   </script>
-</body>
-</html>
+</body></html>
