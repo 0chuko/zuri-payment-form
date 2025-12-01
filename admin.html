@@ -1,28 +1,45 @@
-
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin Panel</title>
-<script src="https://cdn.tailwindcss.com"></script></head>
-<body class="grain bg-black text-white min-h-screen p-10">
-<div class="max-w-4xl mx-auto"><h1 class="text-5xl font-black text-red-500 text-center mb-10">GLOBAL ADMIN PANEL</h1>
-<div class="grid md:grid-cols-3 gap-8 mb-10">
-<div class="bg-gradient-to-br from-cyan-900/50 to-black border border-cyan-500 rounded-3xl p-8">
-<h2 class="text-2xl font-bold text-cyan-400 mb-4">USDT Address</h2>
-<input id="usdt" class="w-full p-4 bg-black/50 border border-cyan-500 rounded-xl text-white mb-4">
-<button onclick="localStorage.setItem('addr_usdt',document.getElementById('usdt').value);alert('Saved')" class="w-full py-4 bg-cyan-600 font-bold rounded-xl hover:scale-105 transition">SAVE</button>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
+</head>
+<body class="grain bg-black text-white min-h-screen p-6">
+<div class="max-w-5xl mx-auto">
+  <div class="flex justify-between items-center mb-10">
+    <h1 class="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400">Dashboard</h1>
+    <div class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-2 rounded-full text-lg font-bold">VIP <span id="vip">0</span></div>
+  </div>
+  <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-10 text-center mb-10">
+    <p class="text-xl opacity-70 mb-4">Total Balance</p>
+    <div class="text-8xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-white" id="balance">$0.00</div>
+    <p class="text-3xl mt-6 text-red-400">Frozen: <span id="frozen">$0.00</span></p>
+    <p class="text-2xl mt-4 text-green-400">Today's Earnings: <span id="today">$0.00</span></p>
+    <div class="mt-8 w-full bg-white/10 rounded-full h-6">
+      <div id="progress" class="bg-gradient-to-r from-cyan-500 to-purple-500 h-full rounded-full text-right pr-4 text-white font-bold" style="width:0%">0%</div>
+    </div>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+    <a href="task.html" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center hover:scale-105 transition"><i class="fas fa-tasks text-4xl text-cyan-400 mb-3"></i><p class="font-medium">Tasks</p></a>
+    <a href="recharge.html" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center hover:scale-105 transition"><i class="fas fa-wallet text-4xl text-green-400 mb-3"></i><p class="font-medium">Deposit</p></a>
+    <a href="withdraw.html" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center hover:scale-105 transition"><i class="fas fa-download text-4xl text-yellow-400 mb-3"></i><p class="font-medium">Withdraw</p></a>
+    <a href="vip.html" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center hover:scale-105 transition"><i class="fas fa-crown text-4xl text-purple-400 mb-3"></i><p class="font-medium">VIP</p></a>
+  </div>
 </div>
-<div class="bg-gradient-to-br from-orange-900/50 to-black border border-orange-500 rounded-3xl p-8">
-<h2 class="text-2xl font-bold text-orange-400 mb-4">BTC Address</h2>
-<input id="btc" class="w-full p-4 bg-black/50 border border-orange-500 rounded-xl text-white mb-4">
-<button onclick="localStorage.setItem('addr_btc',document.getElementById('btc').value);alert('Saved')" class="w-full py-4 bg-orange-600 font-bold rounded-xl hover:scale-105 transition">SAVE</button>
-</div>
-<div class="bg-gradient-to-br from-gray-700/50 to-black border border-gray-500 rounded-3xl p-8">
-<h2 class="text-2xl font-bold text-gray-400 mb-4">ETH Address</h2>
-<input id="eth" class="w-full p-4 bg-black/50 border border-gray-500 rounded-xl text-white mb-4">
-<button onclick="localStorage.setItem('addr_eth',document.getElementById('eth').value);alert('Saved')" class="w-full py-4 bg-gray-600 font-bold rounded-xl hover:scale-105 transition">SAVE</button>
-</div>
-</div>
-<div class="text-center"><a href="admin_login.html" onclick="localStorage.removeItem('admin')" class="text-red-400 underline">Logout</a></div>
-</div>
-<script>if(localStorage.getItem('admin')!=='true')window.location='admin_login.html';
-['usdt','btc','eth'].forEach(c=>document.getElementById(c).value=localStorage.getItem('addr_'+c)||'');</script>
-</body></html>
+<script>
+if(!localStorage.getItem('loggedin')) window.location='login.html';
+const user = localStorage.getItem('currentUser') || 'default';
+document.getElementById('balance').textContent = '$' + (localStorage.getItem(user + '_balance') || '0.00');
+document.getElementById('frozen').textContent = '$' + (localStorage.getItem(user + '_frozen') || '0.00');
+document.getElementById('vip').textContent = localStorage.getItem(user + '_vip') || '0';
+document.getElementById('today').textContent = '$' + (localStorage.getItem(user + '_today') || '0.00');
+const prog = localStorage.getItem(user + '_progress') || '0';
+document.getElementById('progress').style.width = prog + '%';
+document.getElementById('progress').textContent = prog + '%';
+</script>
+</body>
+</html>
