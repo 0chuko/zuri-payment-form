@@ -193,7 +193,7 @@ if (completeButton) {
 
 const logoutDashboard = document.getElementById('logout-link'); 
 const logoutHome = document.getElementById('home-logout-link');
-const adminLogoutBtn = document.getElementById('admin-logout'); // New Admin Logout button
+const adminLogoutBtn = document.getElementById('admin-logout');
 
 function handleLogout(event) {
     event.preventDefault();
@@ -313,11 +313,12 @@ function loadAllUsers() {
 
     userListContainer.innerHTML = '';
     
-    // Get all keys from localStorage
+    // Get ALL keys from localStorage
     const keys = Object.keys(localStorage);
     
+    // Filter the keys to find only the user phone numbers
     const userKeys = keys.filter(key => 
-        // Filter out non-phone number keys
+        // Checks for keys that look like phone numbers (10 digits or more)
         key.length >= 10 && key !== 'isLoggedIn' && key !== 'currentUserPhone'
     );
 
@@ -325,7 +326,7 @@ function loadAllUsers() {
         const userJSON = localStorage.getItem(phone);
         const user = JSON.parse(userJSON);
 
-        // Check if the current user is the admin to skip listing them
+        // Check if the current user is the admin to skip listing them on the list
         if (phone === '9999999999') return; 
 
         const userCardHTML = `
