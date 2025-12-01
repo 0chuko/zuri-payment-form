@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Admin Panel</title><script src="https://cdn.tailwindcss.com"></script></head>
+<body class="bg-black text-white min-h-screen p-10">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-5xl font-black text-red-500 text-center mb-10">GLOBAL ADMIN CONTROL</h1>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-gradient-to-br from-cyan-900/50 to-black border border-cyan-500 rounded-3xl p-8">
+        <h2 class="text-2xl font-bold text-cyan-400 mb-4">USDT (TRC20) Address</h2>
+        <input id="usdt" class="w-full p-4 bg-black/50 border border-cyan-500 rounded-xl text-white mb-4">
+        <button onclick="saveAddr('usdt')" class="w-full py-4 bg-cyan-600 font-bold rounded-xl hover:scale-105 transition">SAVE USDT</button>
+      </div>
+      <div class="bg-gradient-to-br from-orange-900/50 to-black border border-orange-500 rounded-3xl p-8">
+        <h2 class="text-2xl font-bold text-orange-400 mb-4">BTC Address</h2>
+        <input id="btc" class="w-full p-4 bg-black/50 border border-orange-500 rounded-xl text-white mb-4">
+        <button onclick="saveAddr('btc')" class="w-full py-4 bg-orange-600 font-bold rounded-xl hover:scale-105 transition">SAVE BTC</button>
+      </div>
+      <div class="bg-gradient-to-br from-gray-700/50 to-black border border-gray-500 rounded-3xl p-8">
+        <h2 class="text-2xl font-bold text-gray-400 mb-4">ETH (ERC20) Address</h2>
+        <input id="eth" class="w-full p-4 bg-black/50 border border-gray-500 rounded-xl text-white mb-4">
+        <button onclick="saveAddr('eth')" class="w-full py-4 bg-gray-600 font-bold rounded-xl hover:scale-105 transition">SAVE ETH</button>
+      </div>
+    </div>
+    <div class="mt-10 text-center">
+      <a href="admin-login.html" onclick="localStorage.removeItem('admin')" class="text-red-400 underline">Logout</a>
+    </div>
+  </div>
+
+  <script>
+    if(localStorage.getItem('admin')!=='true') window.location='admin-login.html';
+    function saveAddr(coin){
+      const val = document.getElementById(coin).value.trim();
+      if(val){ localStorage.setItem('addr_'+coin, val); alert(coin.toUpperCase()+' address updated globally!'); }
+    }
+    // Load current addresses
+    ['usdt','btc','eth'].forEach(c=>document.getElementById(c).value = localStorage.getItem('addr_'+c)||'');
+  </script>
+</body></html>
