@@ -3,19 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login — Elite Tasks</title>
+    <title>Secure Login — Elite Task Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
+    <style>
+        /* Base styles */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            color: #fff; 
+            background: linear-gradient(135deg, #0f0a1c, #1a0f30);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            overflow: hidden; 
+            position: relative;
+        }
+        
+        /* Existing Advanced dynamic background animation (Base Layer) */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 40%);
+            animation: background-move 20s infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes background-move {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        /* Keyframes for the subtle pulsing glow effect on the glass card */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 80px rgba(56, 189, 248, 0.05); }
+            50% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 100px rgba(168, 85, 247, 0.15); }
+            100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 80px rgba(56, 189, 248, 0.05); }
+        }
+
+        /* Enhanced Glassmorphism for the card with animation */
+        .glass { 
+            border: 1px solid rgba(255, 255, 255, 0.15); 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(30px); 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
+            position: relative;
+            z-index: 10;
+            transition: all 0.5s ease-in-out;
+            animation: pulse-glow 15s infinite alternate ease-in-out; 
+        }
+
+        /* Input styling with focus glow and animation */
+        .input-premium {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+        }
+        .input-premium:focus {
+            outline: none;
+            border-color: #38bdf8; 
+            box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.3); 
+            transform: scale(1.01); 
+        }
+
+        /* Button styling for press/active animation (tactile feedback) */
+        .submit-btn-premium:active {
+            transform: scale(0.98); 
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
+            filter: brightness(0.9); 
+        }
+
+        /* LIVE STREAM ANIMATION STYLES */
+        #live-stream-layer {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1; 
+        }
+
+        .notification-card, .earning-card {
+            position: absolute;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            color: white;
+            opacity: 0;
+            animation: stream-move linear forwards; /* Apply base animation */
+        }
+        
+        /* Specific styles for the social action cards */
+        .notification-card {
+            width: 220px;
+            background: rgba(255, 255, 255, 0.03); 
+        }
+
+        /* Specific styles for the subtle earning cards */
+        .earning-card {
+            width: 150px;
+            background: rgba(59, 130, 246, 0.05); /* Subtle blue tint */
+            font-size: 14px;
+        }
+
+        .profile-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Keyframes for the diagonal movement and rotation */
+        @keyframes stream-move {
+            0% { transform: translate(var(--start-x), var(--start-y)) rotate(var(--rotation-start, 0deg)); opacity: 0; }
+            10% { opacity: var(--max-opacity, 0.8); }
+            90% { opacity: var(--max-opacity, 0.8); }
+            100% { transform: translate(var(--end-x), var(--end-y)) rotate(var(--rotation-end, 10deg)); opacity: 0; }
+        }
+    </style>
 </head>
-<body class="grain bg-black min-h-screen flex items-center justify-center px-6">
-<div class="w-full max-w-md">
-    <h1 class="text-5xl font-black text-center bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 mb-10">Welcome Back</h1>
-    <form id="login-form" class="space-y-8">
-        <input type="tel" id="login-phone" placeholder="Phone Number" required class="w-full px-8 py-5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:border-cyan-400 transition">
-        <input type="password" id="login-password" placeholder="Password" required class="w-full px-8 py-5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:border-cyan-400 transition">
-        <button type="submit" class="w-full py-6 bg-gradient-to-r from-cyan-400 to-purple-500 text-black font-bold text-xl rounded-2xl hover:scale-105 transition shadow-2xl">Access Dashboard</button>
-    </form>
+<body class="grain">
+
+<!-- DYNAMIC LIVE STREAM ANIMATION LAYER -->
+<div id="live-stream-layer">
+    <!-- Notification cards will be injected here by JavaScript -->
 </div>
+
+<div class="w-full max-w-md p-10 glass rounded-3xl">
+    <h1 class="text-5xl font-black text-center mb-4 leading-tight">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-fuchsia-400">
+            ELITE ACCESS
+        </span>
+    </h1>
+    <p class="text-center text-gray-400 mb-10">Secure sign-in for members.</p>
+    
+    <form id="login-form" class="space-y-6">
+        <input type="tel" id="login-phone" placeholder="Phone Number" required 
+               class="input-premium w-full px-6 py-4 rounded-xl text-white placeholder-gray-500">
+               
+        <input type="password" id="login-password" placeholder="Password" required 
+               class="input-premium w-full px-6 py-4 rounded-xl text-white placeholder-gray-500">
+               
+        <button type="submit" 
+                class="submit-btn-premium w-full py-5 mt-4 
+                       bg-gradient-to-r from-purple-600 to-pink-500 
+                       text-white font-bold text-lg 
+                       rounded-xl 
+                       shadow-xl shadow-purple-900/50
+                       hover:scale-[1.01] hover:shadow-2xl transition-all duration-300">
+            Log In to Dashboard
+        </button>
+    </form>
+    
+    <div class="mt-8 text-center border-t border-white/10 pt-6">
+        <p class="text-gray-400 text-sm">New to the platform? 
+            <a href="register.html" class="text-cyan-400 font-bold hover:text-cyan-300 transition-colors">
+                Create a Free Account
+            </a>
+        </p>
+    </div>
+</div>
+<div class="absolute bottom-4 right-4 text-xs text-gray-600 z-20">
+    Elite Task Pro © 2025 | V1.2.0
+</div>
+
+<!-- JavaScript to power the dynamic "Live Stream" background -->
+<script>
+    const liveStreamLayer = document.getElementById('live-stream-layer');
+    
+    // Data for Social Action Cards
+    const platforms = [
+        { name: "Facebook", icon: "fab fa-facebook", color: "bg-blue-600", action: "liked a post" },
+        { name: "YouTube", icon: "fab fa-youtube", color: "bg-red-600", action: "subscribed to a channel" },
+        { name: "Instagram", icon: "fab fa-instagram", color: "bg-pink-600", action: "shared a story" },
+        { name: "Twitter", icon: "fab fa-twitter", color: "bg-sky-500", action: "retweeted a comment" }
+    ];
+
+    const actions = [
+        { icon: "fas fa-thumbs-up", color: "text-blue-400" },
+        { icon: "fas fa-heart", color: "text-red-400" },
+        { icon: "fas fa-share", color: "text-cyan-400" }
+    ];
+
+    function getRandom(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    // Function to create Social Action Notification Cards
+    function createNotification() {
+        const memberId = Math.floor(getRandom(1000, 9999));
+        const platform = platforms[Math.floor(getRandom(0, platforms.length))];
+        const action = actions[Math.floor(getRandom(0, actions.length))];
+
+        const card = document.createElement('div');
+        card.className = 'notification-card flex items-center shadow-2xl';
+        card.innerHTML = `
+            <div class="profile-icon ${platform.color}">
+                <i class="${platform.icon} text-white"></i>
+            </div>
+            <div class="flex-grow ml-2">
+                <span class="text-xs font-bold text-cyan-300">Member ${memberId}</span>
+                <p class="text-xs text-gray-300 leading-none">${platform.action}</p>
+            </div>
+            <i class="${action.icon} ${action.color} text-xl ml-2 animate-pulse"></i>
+        `;
+
+        // Animation variables (slightly more visible opacity)
+        const duration = getRandom(15, 30);
+        card.style.setProperty('--max-opacity', getRandom(0.4, 0.8));
+        setAnimationProps(card, duration);
+        liveStreamLayer.appendChild(card);
+    }
+    
+    // Function to create the subtle Earning Notification Cards (+$20)
+    function createEarningNotification() {
+        const card = document.createElement('div');
+        card.className = 'earning-card flex items-center shadow-2xl';
+        card.innerHTML = `
+            <i class="fas fa-wallet text-green-400 mr-2"></i>
+            <span class="font-bold text-green-300">+$20.00</span>
+            <span class="text-gray-400 ml-1">bonus</span>
+        `;
+        
+        // Animation variables (very low opacity, less rotation for subtlety)
+        const duration = getRandom(10, 25);
+        card.style.setProperty('--max-opacity', getRandom(0.1, 0.25));
+        
+        // Set fixed rotation variables for the earning card to keep it subtle
+        card.style.setProperty('--rotation-start', getRandom(-5, 5) + 'deg');
+        card.style.setProperty('--rotation-end', getRandom(-5, 5) + 'deg');
+        setAnimationProps(card, duration);
+        liveStreamLayer.appendChild(card);
+    }
+
+    // Common function to set animation properties
+    function setAnimationProps(element, duration) {
+        const startX = getRandom(-20, 100) + 'vw'; 
+        const startY = '100vh'; 
+        const endX = getRandom(0, 100) + 'vw';
+        const endY = getRandom(-20, -5) + 'vh'; 
+        
+        element.style.cssText += `
+            left: ${getRandom(0, 90)}%;
+            bottom: -50px;
+            animation: stream-move ${duration}s linear forwards;
+        `;
+
+        element.style.setProperty('--start-x', startX);
+        element.style.setProperty('--start-y', startY);
+        element.style.setProperty('--end-x', endX);
+        element.style.setProperty('--end-y', endY);
+
+        element.addEventListener('animationend', () => {
+            element.remove();
+        });
+    }
+
+    // Main stream loop
+    function startStream() {
+        // Create Social Action notification (more frequent)
+        createNotification();
+        
+        // Randomly decide to create an Earning notification (less frequent, less noticeable)
+        if (Math.random() < 0.4) { // 40% chance of an earning notification being created concurrently
+            createEarningNotification();
+        }
+
+        // Spawn a new action stream event every 1 to 3 seconds
+        const spawnDelay = getRandom(1000, 3000); 
+        setTimeout(startStream, spawnDelay);
+    }
+    
+    window.onload = startStream;
+</script>
 <script src="app.js"></script>
 </body>
 </html>
