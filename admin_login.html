@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin Login</title>
+<script src="https://cdn.tailwindcss.com"></script></head>
+<body class="grain bg-black min-h-screen flex items-center justify-center">
+<div class="bg-white/10 backdrop-blur-xl rounded-3xl p-12 w-96">
+<h1 class="text-4xl font-black text-center text-cyan-400 mb-10">ADMIN LOGIN</h1>
+<form onsubmit="event.preventDefault();if(this.u.value==='admin'&&this.p.value==='admin123'){localStorage.setItem('admin','true');window.location='admin.html';}else alert('Wrong');">
+<input type="text" name="u" placeholder="Username" class="w-full p-4 mb-4 bg-black/50 border border-cyan-500 rounded-xl text-white" required>
+<input type="password" name="p" placeholder="Password" class="w-full p-4 mb-8 bg-black/50 border border-cyan-500 rounded-xl text-white" required>
+<button type="submit" class="w-full py-5 bg-gradient-to-r from-cyan-500 to-purple-600 font-black text-xl rounded-xl hover:scale-105 transition">LOGIN</button>
+</form></div></body></html>
